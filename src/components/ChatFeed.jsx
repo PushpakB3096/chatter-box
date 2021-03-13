@@ -8,6 +8,18 @@ const ChatFeed = props => {
     // gets the active chat from the list of different chats
     const chat = chats && chats[activeChat]
 
+    // this will show all the users who have read a particular message
+    const renderReadReceipts = (message, isMyMessage) => {
+        // renders receipt only when user has read the message
+        return chat.people.map((person, index) => person.last_read === message.id && (
+            <div
+                key={`read_${index}`}
+                className="read-receipt"
+                style={{ float: isMyMessage ? 'right' : 'left', backgroundImage: `url(${person?.person?.avatar})` }}
+            />
+        ))
+    }
+
     // renders messages from the active chat
     const renderMessages = () => {
         const keys = Object.keys(messages)
@@ -38,8 +50,7 @@ const ChatFeed = props => {
                         className="read-receipts"
                         style={{ marginRight: isMyMessage ? '18px' : '0', marginLeft: isMyMessage ? '0' : '68px' }}
                     >
-                        {/* TODO: read receipts */}
-                        Read reciepts
+                        { renderReadReceipts(message, isMyMessage) }                        
                     </div>
                 </div>
             )
