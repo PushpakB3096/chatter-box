@@ -1,13 +1,29 @@
 import { useState } from 'react'
-const MessageForm = () => {
-    const [ value, setValue ] = useState('')
+import { isTyping, sendMessage } from 'react-chat-engine'
 
-    const handleSubmit = () => {
-        // TODO: will handle the logic to submit a message
+const MessageForm = props => {
+    const [ value, setValue ] = useState('')
+    const { chatId, creds } = props
+
+    const handleSubmit = event => {
+        // need to prevent the default form behaviour on submit
+        event.preventDefault()
+        // trim the message
+        const text = value.trim()
+
+        // only send the message if the message actually contains anything
+        if (text.length > 0) {
+            sendMessage(creds, chatId, { text })
+        }
+
+        // need to reset the input field once the message is sent
+        setValue('')
     }
 
-    const handleChange = () => {
-        // TODO: will handle the logic incase user starts typing a message
+    const handleChange = event => {
+        setValue(event.target.value)
+
+        isTyping(props, chatId)
     }
 
     return (
@@ -17,6 +33,7 @@ const MessageForm = () => {
                 placeholder="Start typing..."
                 value={ value }
                 onChange={ handleChange }
+                onSubmit={ handleSubmit }
             />
         </form>
     )
