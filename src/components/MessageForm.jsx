@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { isTyping, sendMessage } from 'react-chat-engine'
-import { PictureOutlined } from '@ant-design/icons'
+import { PictureOutlined, SendOutlined } from '@ant-design/icons'
 
 const MessageForm = props => {
     const [ value, setValue ] = useState('')
@@ -24,11 +24,19 @@ const MessageForm = props => {
     const handleChange = event => {
         setValue(event.target.value)
 
+        // shows that the user is typing
         isTyping(props, chatId)
     }
 
     const handleUpload = event => {
-        // TODO: handle attachments
+        // get the uploaded image
+        const files = event.target.files
+
+        // sending text as empty because there is no text to send
+        sendMessage(creds, chatId, {
+            files,
+            text: ''
+        })
     }
 
     return (
@@ -54,6 +62,13 @@ const MessageForm = props => {
                 style={{ display: 'none' }}
                 onChange={ handleUpload }
             />
+            {/* adding a button to send message or image */}
+            <button
+                type="submit"
+                className="send-button"
+            >
+                <SendOutlined className="send-icon" />
+            </button>
         </form>
     )
 }
