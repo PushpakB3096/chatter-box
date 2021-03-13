@@ -4,6 +4,7 @@ import { useState } from "react"
 const LoginForm = () => {
     const [ username, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
+    const [ error, setError ] = useState('')
 
     // handles clicking of the login button
     const handleSubmit = async event => {
@@ -30,7 +31,7 @@ const LoginForm = () => {
             // reloading the page after a successful authentication to ensure user can see the chat room. Otherwise, they will see login form
             window.location.reload()
         } catch (error) {
-
+            setError('Sorry, wrong credentials')
         }
     }
 
@@ -64,6 +65,7 @@ const LoginForm = () => {
                             <span>Start Chatting</span>
                         </button>
                     </div>
+                    <div className="error">{ error }</div>
                 </form>
             </div>
         </div>
