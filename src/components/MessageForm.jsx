@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { isTyping, sendMessage } from 'react-chat-engine'
+import { PictureOutlined } from '@ant-design/icons'
 
 const MessageForm = props => {
     const [ value, setValue ] = useState('')
@@ -26,6 +27,10 @@ const MessageForm = props => {
         isTyping(props, chatId)
     }
 
+    const handleUpload = event => {
+        // TODO: handle attachments
+    }
+
     return (
         <form className="message-form" onSubmit={ handleSubmit }>
             <input 
@@ -34,6 +39,20 @@ const MessageForm = props => {
                 value={ value }
                 onChange={ handleChange }
                 onSubmit={ handleSubmit }
+            />
+            {/* for adding image upload button */}
+            <label htmlFor="upload-button">
+                <span className="image-button">
+                    <PictureOutlined className="picture-icon" />
+                </span>
+            </label>
+            {/* this input form will not be visible because we are using the label above for that */}
+            <input 
+                type="file"
+                multiple={false}
+                id="upload-button"
+                style={{ display: 'none' }}
+                onChange={ handleUpload }
             />
         </form>
     )
