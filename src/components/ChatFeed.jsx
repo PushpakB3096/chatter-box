@@ -29,8 +29,8 @@ const ChatFeed = props => {
                         {
                             // if the message belongs to the user, then render MyMessage component, otherwise renders the TheirMessage component
                             isMyMessage 
-                            ? <MyMessage /> 
-                            : <TheirMessage />
+                            ? <MyMessage message={ message }/> 
+                            : <TheirMessage message={message} lastMessage={messages[lastMessageKey]} />
                         }
                     </div>
                     {/* this block will render read receipts */}
