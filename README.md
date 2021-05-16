@@ -15,3 +15,23 @@ This project is still undergoing.
 * ReactJS
 * ChatEngine API
 * Local Storage to persist user after page refresh
+
+## Run This App Locally
+
+Run the below command to install the dependencies
+```sh
+npm install
+```
+Run the below command to start the app
+```sh
+npm start
+```
+
+| Username | Password |
+| ------ | ------ |
+| RashiG | pass123 |
+| PushpakB | pass123 |
+
+Use the above passwords to login to the app. The first password is a user login. The second one is admin account. These logins will take you to a demo chat room where you can test out all the features of the app. If you want to create your own chat room, then you need to head over to [ChatEngine](https://chatengine.io/). Obtain the project ID and use it in the App.js file.
+
+
